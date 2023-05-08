@@ -59,6 +59,29 @@ table {
   padding: 20px;
 }
 
-#main {
-  color: purple;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar {
+  display: block;
+  height: 100%;
+  width: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 40px;
+  background-color: lightblue;
+}
+
+.sidebar > ul {
+  padding: 20px;
+  display: block;
+}
+
+#canva {
+  display: flex;
+  margin-left: 150px;
 }
