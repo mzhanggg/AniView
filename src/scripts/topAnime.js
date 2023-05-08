@@ -15,7 +15,7 @@ async function fetchTopAnime() {
 }
  // graphing needs to be fine tuned
  
-async function drawTopAnime() {
+export async function drawTopAnime() {
     const data = await fetchTopAnime();
     // const canva = document.querySelector('#canva')
     // canva.append("svg")
