@@ -11,5 +11,4 @@ document.addEventListener('DOMContentLoaded', () => {
     barGraph.addEventListener("click", drawTopAnime)
     bubblePacking.addEventListener("click", graphTopAnimeGenres)
 
-
 })

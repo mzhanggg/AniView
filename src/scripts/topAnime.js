@@ -7,10 +7,11 @@ async function fetchTopAnime() {
         const title = datum.title_english;
         const genres = datum.genres;
         const favoritesCount = datum.favorites;
-
-        animeDetails.push({title, genres, favoritesCount});
-    })
-
+        const id = datum.mal_id;
+        
+        animeDetails.push({title, genres, favoritesCount, id});
+    });
+    
     return animeDetails;
 }
  
@@ -44,14 +45,16 @@ export async function drawTopAnime() {
     
     svg.append('g')
         .attr('fill', 'lightblue')
+        .attr('cursor', 'pointer')
         .selectAll('rect')
         .data(data.sort( (a,b) => d3.descending(a.favoritesCount, b.favoritesCount)))
         .join('rect')
             .attr('x', (d, i) => x(i))
             .attr('y', (d) => y(d.favoritesCount))
             .attr('height', d => y(0) - y(d.favoritesCount))
-            .attr('width', x.bandwidth());
-    
+            .attr('width', x.bandwidth())
+            .attr('id', d => d.id);
+
     function xAxis(g) {
         g.attr('transform', `translate(0, ${height - margin.bottom})`)
         .call(d3.axisBottom(x).tickFormat( i => data[i].title ))
