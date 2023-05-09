@@ -10,22 +10,23 @@ async function fetchTopAnimeGenres() {
         const genres = datum.genres;
         
         genres.forEach(genre => {
-            const genreName = genre.name
-            const matchingGenre = animeGenres.children.find(child => child.name === genreName)
+            const genreName = genre.name;
+            const matchingGenre = animeGenres.children.find(child => child.name === genreName);
 
             if (matchingGenre) {
-                matchingGenre.children.push( {title, score} );
+                matchingGenre.children.push({title, score});
             } else {
                 animeGenres.children.push({ name: genreName, children: [ {title, score} ]});
             };
 
         });
     });
-    console.log(animeGenres)
+
     return animeGenres;
 }
 
 export async function graphTopAnimeGenres() {
+    clearVisual();
 
     const data = await fetchTopAnimeGenres();
 
@@ -38,11 +39,11 @@ export async function graphTopAnimeGenres() {
                 .style('cursor', 'pointer')
                 
     const root = d3.hierarchy(data)
-            .sum(d => d.score)
+            .sum(d => d.score);
 
     const pack = d3.pack()
                 .size([800, 800])
-                .padding(4)
+                .padding(4);
     
     const packedData = pack(root);
 
@@ -50,7 +51,7 @@ export async function graphTopAnimeGenres() {
     const circles = svg.selectAll('circle')
                     .data(packedData.descendants())
                     .enter()
-                    .append('circle')
+                    .append('circle');
 
     circles.attr('cx', d => d.x)
             .attr('cy', d => d.y)
@@ -58,7 +59,7 @@ export async function graphTopAnimeGenres() {
             .attr('stroke', 'steelblue')
             .attr('stroke-width', '2px')
             .attr('fill', 'white')
-            .attr('class', 'bubble')
+            .attr('class', 'bubble');
 
     // makes text elements for labels and bind data
     const labels = svg.selectAll('text')
@@ -66,13 +67,22 @@ export async function graphTopAnimeGenres() {
         .enter()
         .append('text')
         .attr('text-anchor', 'middle')
-        .attr('font-size', d => d.value / 5)
+        .attr('font-size', d => d.value / 5);
 
     // gives labels position and text content based on corresponding circle
     labels.attr('x', d => d.x)
         .attr('y', d => d.y)
-        .text(d => d.data.title) 
+        .text(d => d.data.title) ;
 
     
     svg.node();
+
+}
+
+function clearVisual() {
+    const loading = d3.select("#loading")
+    loading.remove();
+
+    const svg = d3.select('svg');
+    svg.remove();
 }

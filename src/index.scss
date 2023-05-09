@@ -12,23 +12,21 @@
 
 
 
-.sidebar {
-    display: block;
-    height: 100%;
-    width: 150px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding-top: 40px;
-    // background-color: lightblue;
+.container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .sidebar > ul {
     padding: 20px;
-    display: block;
+    width: 300px;
+    border: black 1px solid;
+    margin: 50px;
+    // height: 1500px;
 }
 
 #canva {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,4 +40,18 @@ circle {
     justify-content: center;
 }
 
+.nav-bar > ul {
+    display: flex;
+    font-size: 25px;
+    border: 2px black solid;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
 
+
+
+.graph-types > li:hover {
+    cursor: pointer;
+    transform: scale(1.1); 
+}
