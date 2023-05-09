@@ -4,7 +4,7 @@ import {graphTopAnimeGenres} from "./scripts/topAnimeGenres.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    graphTopAnimeGenres()
-    // drawTopAnime()
+    // graphTopAnimeGenres()
+    drawTopAnime()
 
 })
