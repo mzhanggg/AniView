@@ -8,15 +8,17 @@ async function fetchTopAnimeGenres() {
         const title = datum.title_english;
         const score = datum.score;
         const genres = datum.genres;
+        const id = datum.mal_id;
+        const imageURL = datum.images.jpg.image_url;
         
         genres.forEach(genre => {
             const genreName = genre.name;
             const matchingGenre = animeGenres.children.find(child => child.name === genreName);
 
             if (matchingGenre) {
-                matchingGenre.children.push({title, score});
+                matchingGenre.children.push({title, score, id, imageURL});
             } else {
-                animeGenres.children.push({ name: genreName, children: [ {title, score} ]});
+                animeGenres.children.push({ name: genreName, children: [ {title, score, id, imageURL} ]});
             };
 
         });
@@ -27,6 +29,9 @@ async function fetchTopAnimeGenres() {
 
 export async function graphTopAnimeGenres() {
     clearVisual();
+
+    const loading = d3.select("#loading-gif")
+    loading.style("display", "flex")
 
     const data = await fetchTopAnimeGenres();
 
@@ -47,7 +52,6 @@ export async function graphTopAnimeGenres() {
     
     const packedData = pack(root);
 
-    // binds and created circles to each node in the hierarchy
     const circles = svg.selectAll('circle')
                     .data(packedData.descendants())
                     .enter()
@@ -59,9 +63,9 @@ export async function graphTopAnimeGenres() {
             .attr('stroke', 'steelblue')
             .attr('stroke-width', '2px')
             .attr('fill', 'white')
-            .attr('class', 'bubble');
+            .attr('class', 'bubble')
+            .attr('id', d => d.data.id);
 
-    // makes text elements for labels and bind data
     const labels = svg.selectAll('text')
         .data(packedData.descendants())
         .enter()
@@ -69,19 +73,18 @@ export async function graphTopAnimeGenres() {
         .attr('text-anchor', 'middle')
         .attr('font-size', d => d.value / 5);
 
-    // gives labels position and text content based on corresponding circle
     labels.attr('x', d => d.x)
         .attr('y', d => d.y)
         .text(d => d.data.title) ;
 
+    loading.style("display", "none")
     
-    svg.node();
-
+    return svg.node();
 }
 
 function clearVisual() {
-    const loading = d3.select("#loading")
-    loading.remove();
+    const message = d3.select("#message")
+    message.remove();
 
     const svg = d3.select('svg');
     svg.remove();

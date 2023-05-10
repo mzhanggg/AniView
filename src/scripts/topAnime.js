@@ -18,18 +18,21 @@ async function fetchTopAnime() {
 export async function drawTopAnime() {
     clearVisual();
     
+    const loading = d3.select("#loading-gif")
+    loading.style("display", "flex")
+
     const data = await fetchTopAnime();
     
-    let margin = { top: 20, right: 30, bottom: 40, left: 90 };
-    let width = 1000;
-    let height = 1000; 
+    let margin = { top: 10, right: 30, bottom: 40, left: 90 };
+    let width = 800;
+    let height = 800; 
 
     const canva = d3.select("#canva")
 
     const svg = canva.append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, 1000, 1000]);
+                .attr("viewBox", [0, 0, 800, 800]);
 
     const x = d3.scaleLinear()
         .domain([0, 250000])
@@ -92,13 +95,15 @@ export async function drawTopAnime() {
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
 
+    loading.style("display", "none")
+
     return svg.node();
 
 }
     
 function clearVisual() {
-    const loading = d3.select("#loading")
-    loading.remove();
+    const message = d3.select("#message")
+    message.remove();
     
     const svg = d3.select('svg');
     svg.remove();
