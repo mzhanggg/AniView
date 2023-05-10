@@ -11,7 +11,7 @@ async function fetchTopAnime() {
         
         animeDetails.push({title, genres, favoritesCount, id});
     });
-    
+
     return animeDetails;
 }
  
@@ -54,7 +54,13 @@ export async function drawTopAnime() {
             .attr('y', (d, i) => y(i))
             .attr('width', d => x(d.favoritesCount) - margin.left)
             .attr('height', y.bandwidth())
-            .attr('id', d => d.id);
+            .attr('id', d => d.id)
+
+    const rects = Array.from(document.querySelectorAll('rect'))
+
+    rects.forEach( rect => {
+        rect.addEventListener('click', fillSidebar)
+    })
         
     function yAxis(g) {
         g.attr('transform', `translate(${margin.left}, 0)`)
@@ -64,7 +70,8 @@ export async function drawTopAnime() {
             .attr('dx', '15px')
             .attr('font-size', '18px')
             .attr('color', '#0B3140')
-            .classed('axis-label', true);
+            .classed('axis-label', true)
+            .attr('id', d => d.id);
     }
 
     function xAxis(g) {
@@ -90,7 +97,8 @@ export async function drawTopAnime() {
         .attr("transform", "rotate(-90)")
         .text("Title")
         .style("font-size", "25px")
-        .attr('color', '#0B3140');
+        .attr('color', '#0B3140')
+        // .attr('id', 0);
 
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
@@ -109,5 +117,67 @@ function clearVisual() {
     svg.remove();
 }
 
+async function fillSidebar() {
+    clearSidebar();
 
+    const data = await fetchAnime();
+    const inData = data[0];
 
+    const title = document.querySelector("#title")
+    title.innerHTML = inData.title
+
+    const image = document.querySelector("#image")
+    const imageEl = document.createElement('img')
+    imageEl.src  = `${inData.imageURL}`
+    imageEl.setAttribute("id", "image-id")
+    image.append(imageEl)
+
+    const synopsis = document.querySelector("#synopsis")
+    synopsis.innerHTML = inData.synopsis
+    
+    const genres = document.querySelector("#genres")
+    // more code
+
+    const score = document.querySelector("#score")
+    score.innerHTML = inData.score
+
+    const status = document.querySelector("#status")
+    status.innerHTML = inData.status
+
+    const rating = document.querySelector("#rating")
+    rating.innerHTML = inData.rating
+}
+
+async function fetchAnime() {
+    const id = event.target.id
+    
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+    const data = await response.json();
+    
+    const animeDetails = [];
+
+    const inData = data.data
+    const title = inData.title_english;
+    const genres = inData.genres;
+    const score = inData.score;
+    const synopsis = inData.synopsis;
+    const imageURL = inData.images.jpg.image_url;
+    const status = inData.status;
+    const rating = inData.rating;
+
+    animeDetails.push({title, genres, score, synopsis, imageURL, status, rating});
+
+    return animeDetails;
+}
+
+function clearSidebar() {
+    const message = document.querySelector("#message1")
+    message.style.display = "none"
+
+    const img = document.querySelector("#image-id")
+    console.log(img)
+
+    if (img) {
+        img.remove();
+    }
+}

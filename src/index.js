@@ -5,6 +5,7 @@ import {closeModalWindow, closeModalBtn} from "./scripts/modal.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
     const barGraph = document.querySelector(".bar-graph")
     const bubblePacking = document.querySelector(".bubble-packing")
     
@@ -17,5 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener("click", closeModalBtn)
     window.addEventListener("click", closeModalWindow)
 
-    
+
+
 })
