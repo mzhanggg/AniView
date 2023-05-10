@@ -94,6 +94,41 @@ circle {
 .axis-label {
     font-style: italic;
 }
+/*!****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/modal.css ***!
+  \****************************************************************************************************/
+.modal {
+    display: block; 
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+  
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 50px;
+    border: 2px #0B3140 solid;
+    width: 75%; 
+}
+  
+
+.closeBtn {
+    color: #0B3140;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.closeBtn:hover, .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
