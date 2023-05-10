@@ -8,3 +8,7 @@ circle {
 #canva {
     background: white;
 }
+
+.axis-label {
+    font-style: italic;
+}

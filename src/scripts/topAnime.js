@@ -20,60 +20,80 @@ export async function drawTopAnime() {
     
     const data = await fetchTopAnime();
     
-    let margin = { top: 30, right: 30, bottom: 30, left: 30 };
-    let width = 1200;
+    let margin = { top: 20, right: 30, bottom: 40, left: 90 };
+    let width = 1000;
     let height = 1000; 
-    
+
     const canva = d3.select("#canva")
-                    .attr("width", width)
-                    .attr("height", height);
-    
+
     const svg = canva.append("svg")
-                .attr("height", height - margin.top - margin.bottom)
                 .attr("width", width - margin.left - margin.right)
-                .attr("viewBox", [0, 0, 1075, 1075]);
-                
-    
-    const x = d3.scaleBand()
-        .domain(d3.range(data.length))
-        .range([margin.left, width - margin.right])
-        .padding(0.3);
-    
-    const y = d3.scaleLinear()
+                .attr("height", height - margin.top - margin.bottom)
+                .attr("viewBox", [0, 0, 1000, 1000]);
+
+    const x = d3.scaleLinear()
         .domain([0, 250000])
-        .range([height - margin.bottom, margin.top]);
-    
+        .range([margin.left, width - margin.right]);
+
+
+    const y = d3.scaleBand()
+        .domain(d3.range(data.length))
+        .range([margin.top, height - margin.bottom])
+        .padding(0.3);
+
     svg.append('g')
-        .attr('fill', 'lightblue')
+        .attr('fill', '#F29580')
         .attr('cursor', 'pointer')
         .selectAll('rect')
         .data(data.sort( (a,b) => d3.descending(a.favoritesCount, b.favoritesCount)))
         .join('rect')
-            .attr('x', (d, i) => x(i))
-            .attr('y', (d) => y(d.favoritesCount))
-            .attr('height', d => y(0) - y(d.favoritesCount))
-            .attr('width', x.bandwidth())
+            .attr('x', margin.left)
+            .attr('y', (d, i) => y(i))
+            .attr('width', d => x(d.favoritesCount) - margin.left)
+            .attr('height', y.bandwidth())
             .attr('id', d => d.id);
-
-    function xAxis(g) {
-        g.attr('transform', `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(x).tickFormat( i => data[i].title ))
+        
+    function yAxis(g) {
+        g.attr('transform', `translate(${margin.left}, 0)`)
+        .call(d3.axisLeft(y).tickFormat( i => data[i].title ))
         .selectAll('text')
             .style('text-anchor', 'start')
-            .attr('dx', '10px')
-            .attr('dy', '-5px')
-            .attr('transform', 'rotate(-90)');
+            .attr('dx', '15px')
+            .attr('font-size', '18px')
+            .attr('color', '#0B3140')
+            .classed('axis-label', true);
     }
-    
-    function yAxis(g) {
-        g.attr('transform', `translate(${margin.left}, 0)`);
-        g.call(d3.axisLeft(y).ticks(null, data.format));
-        g.attr('font-size', '15px');
+
+    function xAxis(g) {
+        g.attr('transform', `translate(0, ${height - margin.bottom})`);
+        g.call(d3.axisBottom(x).tickFormat(d => d / 1000 + 'k'));
+        g.attr('font-size', '18px')
     }
-    
+
+    svg.append("text")
+        .attr("class", "x-axis-label")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height + 20)
+        .text("Favorites Count")
+        .style("font-size", "25px")
+        .attr('color', '#0B3140')
+
+    svg.append("text")
+        .attr("class", "y-axis-label")
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
+        .attr("y", margin.left / 2)
+        .attr("transform", "rotate(-90)")
+        .text("Title")
+        .style("font-size", "25px")
+        .attr('color', '#0B3140');
+
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
-    svg.node();
+
+    return svg.node();
+
 }
     
 function clearVisual() {

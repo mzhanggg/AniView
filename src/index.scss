@@ -1,17 +1,35 @@
 @import "./styles/reset.css";
 @import "./styles/bubbles.css";
+@import "./styles/bar-graph.css";
+
 
 .header {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 50px;
+    font-size: 55px;
     padding: 100px 5px;
     color: #F29580;
     background-image: url('/gif2.gif');
     opacity: 0.9;
     background-size: cover;
     text-shadow: 2px 2px 5px #F29580;
+}
+
+.nav-bar > ul {
+    display: flex;
+    font-size: 25px;
+    border: 2px #0B3140 solid;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    outline: 1px solid #0B3140;
+    outline-offset: 5px;
+    color: #F2AF88;
+    background-color: #0B3140;
+    opacity: 1;
+    opacity: 0.95;
+    letter-spacing: 2px;
 }
 
 .container {
@@ -24,7 +42,6 @@
     width: 300px;
     border: #0B3140 2px solid;
     margin: 50px;
-
 }
 
 #canva {
@@ -34,18 +51,6 @@
     justify-content: center;
     margin: 50px;
     border: solid 2px #0B3140;
-}
-
-.nav-bar > ul {
-    display: flex;
-    font-size: 25px;
-    border: 2px #0B3140 solid;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
-    outline: 1px solid #0B3140;
-    outline-offset: 5px;
-    color: #F29580
 }
 
 .graph-types > li:hover {
