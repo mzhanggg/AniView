@@ -133,19 +133,28 @@ async function fillSidebar() {
     image.append(imageEl)
 
     const synopsis = document.querySelector("#synopsis")
-    synopsis.innerHTML = inData.synopsis
+    synopsis.innerHTML = "Synopsis: " + inData.synopsis
     
     const genres = document.querySelector("#genres")
-    // more code
+    genres.innerHTML = "Genres: "
+    let genreArray = [];
+
+    inData.genres.forEach( (hash, i) => {
+        if (i === (inData.genres.length - 1)) {
+            genres.innerHTML += hash.name;
+        } else {
+            genres.innerHTML += hash.name + ", "
+        };
+    });
 
     const score = document.querySelector("#score")
-    score.innerHTML = inData.score
+    score.innerHTML = "Score: " + inData.score
 
     const status = document.querySelector("#status")
-    status.innerHTML = inData.status
+    status.innerHTML = "Status: " + inData.status
 
     const rating = document.querySelector("#rating")
-    rating.innerHTML = inData.rating
+    rating.innerHTML = "Rating: " + inData.rating
 }
 
 async function fetchAnime() {
@@ -171,13 +180,13 @@ async function fetchAnime() {
 }
 
 function clearSidebar() {
-    const message = document.querySelector("#message1")
+    const message = document.querySelector("#message1");
     message.style.display = "none"
 
-    const img = document.querySelector("#image-id")
-    console.log(img)
+    const img = document.querySelector("#image-id");
 
     if (img) {
         img.remove();
-    }
+    };
+
 }

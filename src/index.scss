@@ -2,6 +2,8 @@
 @import "./styles/bubbles.css";
 @import "./styles/bar-graph.css";
 @import "./styles/modal.css";
+@import "./styles/side-bar.css";
+
 
 .header {
     display: flex;
@@ -16,6 +18,11 @@
     text-shadow: 2px 2px 5px #F29580;
 }
 
+// header-gif {
+//     // opacity: 0.95;
+//     // background-size: cover;
+//     // text-shadow: 2px 2px 5px #F29580;
+// }
 .nav-bar > ul {
     display: flex;
     font-size: 25px;
