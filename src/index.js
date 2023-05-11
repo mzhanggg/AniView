@@ -17,4 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener("click", closeModalBtn)
     window.addEventListener("click", closeModalWindow)
 
+    drawTopAnime()
 })

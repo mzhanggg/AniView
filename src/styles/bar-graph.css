@@ -1,21 +1,16 @@
-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    stroke: #0B3140;
+rect {
+    fill: #d99d8f;
+    opacity: 0.8;
 }
 
-#canva {
-    background: white;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 50px;
-    border: solid 2px #0B3140;
-    
+text {
+    fill: white;
 }
 
-.axis-label {
-    font-style: italic;
+path {
+    stroke: #F2AF88;
+}
+
+line {
+    stroke: #F2AF88;
 }

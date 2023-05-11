@@ -3,8 +3,6 @@ circle {
     align-items: center;
     justify-content: center;
     stroke: #0B3140;
-}
-
-#canva {
-
+    fill: #F2AF88;
+    opacity: 0.2;
 }

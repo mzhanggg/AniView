@@ -69,7 +69,7 @@ export async function drawTopAnime() {
             .style('text-anchor', 'start')
             .attr('dx', '15px')
             .attr('font-size', '18px')
-            .attr('color', '#0B3140')
+            .style('font-family', "'Space Grotesk', sans-serif")
             .classed('axis-label', true)
             .attr('id', d => d.id);
     }
@@ -87,7 +87,6 @@ export async function drawTopAnime() {
         .attr("y", height + 20)
         .text("Favorites Count")
         .style("font-size", "25px")
-        .attr('color', '#0B3140')
 
     svg.append("text")
         .attr("class", "y-axis-label")
@@ -97,7 +96,6 @@ export async function drawTopAnime() {
         .attr("transform", "rotate(-90)")
         .text("Title")
         .style("font-size", "25px")
-        .attr('color', '#0B3140')
         // .attr('id', 0);
 
     svg.append('g').call(xAxis);
@@ -133,10 +131,10 @@ async function fillSidebar() {
     image.append(imageEl)
 
     const synopsis = document.querySelector("#synopsis")
-    synopsis.innerHTML = "Synopsis: " + inData.synopsis
+    synopsis.innerHTML = "<span>Synopsis: </span>" + inData.synopsis
     
     const genres = document.querySelector("#genres")
-    genres.innerHTML = "Genres: "
+    genres.innerHTML = "<span>Genres: </span>"
     let genreArray = [];
 
     inData.genres.forEach( (hash, i) => {
@@ -148,13 +146,16 @@ async function fillSidebar() {
     });
 
     const score = document.querySelector("#score")
-    score.innerHTML = "Score: " + inData.score
+    score.innerHTML = "<span>Score: </span>" + inData.score
 
     const status = document.querySelector("#status")
-    status.innerHTML = "Status: " + inData.status
+    status.innerHTML = "<span>Status: </span>" + inData.status
 
     const rating = document.querySelector("#rating")
-    rating.innerHTML = "Rating: " + inData.rating
+    rating.innerHTML = "<span>Rating: </span>" + inData.rating
+
+    const favorites = document.querySelector("#favorites")
+    favorites.innerHTML = "<span>User Favorites Count: </span>" + inData.favorites
 }
 
 async function fetchAnime() {
@@ -173,8 +174,10 @@ async function fetchAnime() {
     const imageURL = inData.images.jpg.image_url;
     const status = inData.status;
     const rating = inData.rating;
+    const favorites = inData.favorites;
 
-    animeDetails.push({title, genres, score, synopsis, imageURL, status, rating});
+
+    animeDetails.push({title, genres, score, synopsis, imageURL, status, rating, favorites});
 
     return animeDetails;
 }

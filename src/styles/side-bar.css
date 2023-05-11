@@ -1,3 +1,32 @@
 .anime-info > li {
-    background-color: yellow;
+    margin-bottom: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #d99d8f;
+    font-size: 17px;
+}
+
+li > span {
+    font-weight: bold;
+    color: #F2AF88;
+    color: white;
+}
+
+#title {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: white
+}
+
+#image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+}
+
+#synopsis {
+    text-align: justify;
+    line-height: 1.05;
 }
