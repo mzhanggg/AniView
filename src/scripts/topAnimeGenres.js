@@ -5,7 +5,7 @@ async function fetchTopAnimeGenres() {
     const animeGenres = { name: 'root', children: [] };
 
     data.data.forEach(datum => {
-        const title = datum.title_english;
+        const name = datum.title_english;
         const score = datum.score;
         const genres = datum.genres;
         const id = datum.mal_id;
@@ -16,9 +16,9 @@ async function fetchTopAnimeGenres() {
             const matchingGenre = animeGenres.children.find(child => child.name === genreName);
 
             if (matchingGenre) {
-                matchingGenre.children.push({title, score, id, imageURL});
+                matchingGenre.children.push({name, score, id, imageURL});
             } else {
-                animeGenres.children.push({ name: genreName, children: [ {title, score, id, imageURL} ]});
+                animeGenres.children.push({ name: genreName, children: [ {name, score, id, imageURL} ]});
             };
 
         });
@@ -34,25 +34,23 @@ export async function graphTopAnimeGenres() {
     loading.style("display", "flex")
 
     const data = await fetchTopAnimeGenres();
-
-    const root2 = d3.hierarchy(data)
+    const rootBase = d3.hierarchy(data)
             .sum(d => d.score);
 
     const pack = d3.pack()
                 .size([1000, 1000])
                 .padding(4);
     
-    const root = pack(root2);
+    const root = pack(rootBase);
 
     let focus = root;
     let view;
-    let size = 1000;
+    let size = 1200;
 
     const canva = d3.select('#canva')
     const svg = canva.append('svg')
             .attr("viewBox", `-${size / 2} -${size / 2} ${size} ${size}`)
             .style("display", "block")
-            .style("margin", "0 -14px")
             .style("cursor", "pointer")
             .on("click", (event) => zoom(event, root));
 
@@ -61,8 +59,6 @@ export async function graphTopAnimeGenres() {
         .data(root.descendants().slice(1))
         .join("circle")
             .attr("pointer-events", d => !d.children ? "none" : null)
-            .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
-            .on("mouseout", function() { d3.select(this).attr("stroke", null); })
             .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
     const label = svg.append("g")
@@ -72,7 +68,6 @@ export async function graphTopAnimeGenres() {
                     .data(root.descendants())
                     .join("text")
                       .style("fill-opacity", d => d.parent === root ? 1 : 0)
-                      .style("display", d => d.parent === root ? "inline" : "none")
                       .text(d => d.data.name);
 
     zoomTo([root.x, root.y, root.r * 2]);
@@ -100,66 +95,15 @@ export async function graphTopAnimeGenres() {
                                 });
     
         label
-          .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+          .style("fill-opacity", d => d.parent != null ? 1 : 0)
           .transition(transition)
-            .style("fill-opacity", d => d.parent === focus ? 1 : 0)
             .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
             .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
     }
 
-    // const canva = d3.select('#canva')
-    // const svg = canva.append('svg')
-    //             .attr('width', 800)
-    //             .attr('height', 800)
-    //             .style('display', 'block')
-    //             .attr('viewBox', "0 0 800 800")
-    //             .style('cursor', 'pointer')
-                
-    // const root = d3.hierarchy(data)
-    //         .sum(d => d.score);
-
-    // const pack = d3.pack()
-    //             .size([800, 800])
-    //             .padding(4);
-    
-    // const packedData = pack(root);
-
-    // const circles = svg.selectAll('circle')
-    //                 .data(packedData.descendants())
-    //                 .enter()
-    //                 .append('circle');
-
-    // circles.attr('cx', d => d.x)
-    //         .attr('cy', d => d.y)
-    //         .attr('r', d => d.r)
-    //         .attr('stroke', 'steelblue')
-    //         .attr('stroke-width', '2px')
-    //         .attr('fill', 'white')
-    //         .attr('class', 'bubble')
-    //         .attr('id', d => d.data.id);
-
-    // const labels = svg.selectAll('text')
-    //     .data(packedData.descendants())
-    //     .enter()
-    //     .append('text')
-    //     .attr('text-anchor', 'middle')
-    //     .attr('font-size', d => d.value / 5);
-
-    // labels.attr('x', d => d.x)
-    //     .attr('y', d => d.y)
-    //     .text(d => d.data.title) ;
-
-
     loading.style("display", "none")
     
     return svg.node();
-}
-
-function color() {
-    d3.scaleLinear()
-        .domain([0, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl)
 }
 
 function clearVisual() {
