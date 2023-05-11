@@ -71,7 +71,6 @@ export async function drawTopAnime() {
             .attr('font-size', '18px')
             .style('font-family', "'Space Grotesk', sans-serif")
             .classed('axis-label', true)
-            .attr('id', d => d.id);
     }
 
     function xAxis(g) {
@@ -95,8 +94,7 @@ export async function drawTopAnime() {
         .attr("y", margin.left / 2)
         .attr("transform", "rotate(-90)")
         .text("Title")
-        .style("font-size", "25px")
-        // .attr('id', 0);
+        .style("font-size", "25px");
 
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
