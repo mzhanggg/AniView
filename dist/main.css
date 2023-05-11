@@ -208,7 +208,7 @@ li > span {
   font-size: 55px;
   padding: 100px 5px;
   color: #F29580;
-  background-image: url("/gif2.gif");
+  background-image: url("https://mzhanggg.github.io/AniView/gif2.gif");
   opacity: 0.95;
   background-size: cover;
   text-shadow: 2px 2px 5px #F29580;
@@ -306,7 +306,7 @@ body {
   flex-direction: column;
   outline: 1px solid #0B3140;
   outline-offset: 5px;
-  background-image: url("/gif2.gif");
+  background-image: url("https://mzhanggg.github.io/AniView/gif2.gif");
   min-height: 40vh;
   opacity: 0.95;
   background-size: cover;
