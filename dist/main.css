@@ -102,11 +102,14 @@ line {
 }
   
 .modal-content {
-    background-color: #fefefe;
+    background-color: #f0f0f0eb;
     margin: 15% auto; 
     padding: 50px;
-    border: 2px #0B3140 solid;
+    border: 3px solid #393E59;
+    outline: 2px dashed #f2af887d;
+    outline-offset: 6px;
     width: 50%; 
+    border-radius: 5%;
 }
   
 
@@ -135,21 +138,26 @@ line {
 #noun {
     font-style: italic;
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     color: #0B3140;
     font-family: 'Space Mono', monospace;
+    text-indent: 3px;
 }
 
 #definition {
     margin-bottom: 20px;
     font-size: 15px;
-    color: #0B3140;
+    color: #10465c;
     font-family: 'Space Mono', monospace;
+    line-height: 1.3;
+    font-style: italic;
+
 }
 
 .modal-content > .welcome {
     line-height: 1.3;
-    color: #0B3140;
+    color: #0d3b4d;
     margin-bottom: 10px;
     font-size: 18px;
     font-family: 'Space Grotesk', sans-serif;
@@ -259,6 +267,7 @@ li > span {
 .graph-types > li:hover {
   cursor: pointer;
   transform: scale(1.1);
+  transition: 0.3s ease;
 }
 
 body {
@@ -275,7 +284,7 @@ body {
   display: none;
 }
 
-#loading-gif {
+#loading-gif, #loading-sidebar {
   display: none;
   align-items: center;
   justify-content: center;
@@ -286,4 +295,44 @@ body {
   color: #F2AF88;
   text-align: middle;
   vertical-align: middle;
+}
+
+.info {
+  background-color: #0B3140;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  outline: 1px solid #0B3140;
+  outline-offset: 5px;
+  background-image: url("/gif2.gif");
+  min-height: 40vh;
+  opacity: 0.95;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.links {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#linkedin, #github {
+  height: 75px;
+  margin: 10px;
+}
+
+#github {
+  height: 70px;
+}
+
+#name {
+  color: #F29580;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 8px black;
 }

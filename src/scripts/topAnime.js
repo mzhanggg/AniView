@@ -118,6 +118,9 @@ function clearVisual() {
 async function fillSidebar() {
     clearSidebar();
 
+    const loadingSidebar = d3.select("#loading-sidebar")
+    loadingSidebar.style("display", "flex")
+
     const data = await fetchAnime();
     const inData = data[0];
 
@@ -155,7 +158,9 @@ async function fillSidebar() {
     rating.innerHTML = "<span>Rating: </span>" + inData.rating
 
     const favorites = document.querySelector("#favorites")
-    favorites.innerHTML = "<span>User Favorites Count: </span>" + inData.favorites
+    favorites.innerHTML = "<span>User Favorites Count: </span>" + inData.favorites;
+
+    loadingSidebar.style("display", "none")
 }
 
 async function fetchAnime() {

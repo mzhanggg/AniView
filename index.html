@@ -21,16 +21,16 @@
       <h1>AniView</h1>
     </header>
 
-    <!-- <div id="modal" class="modal">
+    <div id="modal" class="modal">
       <div class="modal-content">
         <span class="closeBtn">&times;</span>
-        <p id="word">an·i·me</p>
+        <p id="word"><em>/an·i·me/</em></p>
         <p id="noun">noun</p>
-        <p id="definition">a style of Japanese film and television animation, typically aimed at adults as well as children</p>
-        <p class="welcome">As the popularity of anime continues to grows, it becomes increasingly difficult as consumers to figure out where to start, especially as newcomers to the space.</p>
+        <p id="definition">a style of Japanese film and television animation.</p>
+        <p class="welcome">As the popularity of anime continues to grow, it becomes increasingly difficult for consumers to figure out where to start, especially as newcomers to the space.</p>
         <p class="welcome">AniView provides data visualizations for the top 25 rated shows from MyAnimeList, the world's most active online anime and manga community and database.</p>
       </div>
-    </div> -->
+    </div>
 
     <div class="nav-bar">
       <ul class="graph-types">
@@ -47,6 +47,10 @@
             Select a data point on the data visualizations to see further details
           </p>
 
+          <div id="loading-sidebar">
+            <img id="loading-sidebar" src="src/assets/loading-sidebar.gif">
+          </div>
+
           <li id="title"></li>
           <li id="image"></li>
           <li id="synopsis"></li>
@@ -57,20 +61,30 @@
           <li id="rating"></li>
         </ul>
       </div>
-      <span></span>
+      
       <div id="canva">
-
         <p id="message">
           Select a catagory in the navigation bar above to data visualizations
         </p>
 
         <div id="loading">
-          <img id="loading-gif" src="loading.gif">
+          <img id="loading-gif" src="src/assets/loading-sidebar.gif">
         </div>
-        
       </div>
 
     </div>
+
+    <div class="info">
+      <div class="links">
+        <a href="https://www.linkedin.com/in/michele-zhang-380417199/"><img id="linkedin"src="src/assets/linkedin.png"></a>
+        <a href="https://github.com/mzhanggg"><img id="github" src="src/assets/github.png"></a>
+      </div>
+      
+      <div id="name">
+        <p>Michele Zhang, 2023</p>
+      </div>
+    </div>
+
       
   </body>
 
