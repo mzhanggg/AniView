@@ -4,6 +4,9 @@
 @import "./styles/modal.css";
 @import "./styles/side-bar.css";
 
+h1 {
+    cursor: pointer;
+}
 
 .header {
     display: flex;

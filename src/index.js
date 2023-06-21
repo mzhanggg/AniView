@@ -1,6 +1,6 @@
 import {drawTopAnime} from "./scripts/topAnime.js";
 import {graphTopAnimeGenres} from "./scripts/topAnimeGenres.js";
-import {closeModalWindow, closeModalBtn} from "./scripts/modal.js";
+import {closeModalWindow, closeModalBtn, openModal} from "./scripts/modal.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,5 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeBtn.addEventListener("click", closeModalBtn)
     window.addEventListener("click", closeModalWindow)
+
+    const title = document.querySelector('h1');
+    title.addEventListener("click", openModal);
+    
+
 
 })

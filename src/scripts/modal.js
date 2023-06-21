@@ -13,3 +13,12 @@ export function closeModalWindow(event) {
 }
 
 
+export function openModal(event) {
+    const modal = document.querySelector(".modal");
+    const title = document.querySelector('h1');
+
+    if (event.target === title) {
+        modal.style.display = "block";
+    }
+
+}
