@@ -68,7 +68,9 @@ export async function graphTopAnimeGenres() {
                     .data(root.descendants())
                     .join("text")
                       .style("fill-opacity", d => d.parent === root ? 1 : 0)
-                      .text(d => d.data.name);
+                      .text(d => d.data.name)
+                      .attr('font-weight', 'bold')
+                      .attr('font-size', '9.9px')
 
     zoomTo([root.x, root.y, root.r * 2]);
 

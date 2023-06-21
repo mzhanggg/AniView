@@ -38,7 +38,6 @@ export async function drawTopAnime() {
         .domain([0, 250000])
         .range([margin.left, width - margin.right]);
 
-
     const y = d3.scaleBand()
         .domain(d3.range(data.length))
         .range([margin.top, height - margin.bottom])
@@ -71,6 +70,8 @@ export async function drawTopAnime() {
             .attr('font-size', '18px')
             .style('font-family', "'Space Grotesk', sans-serif")
             .classed('axis-label', true)
+            .attr('id', (d, i) => data[i].id)
+            .style('cursor', 'pointer')
     }
 
     function xAxis(g) {
@@ -100,6 +101,11 @@ export async function drawTopAnime() {
     svg.append('g').call(yAxis);
 
     loading.style("display", "none")
+
+    const titles = Array.from(selectAnimeTitle());
+    titles.forEach( title => {
+        title.addEventListener('click', fillSidebar)
+    })
 
     return svg.node();
 
@@ -195,4 +201,16 @@ function clearSidebar() {
         img.remove();
     };
 
+}
+
+function selectAnimeTitle() {
+    const titles = [];
+    
+    for (let i = 2; i <= 26; i++) {
+        const selected = `#canva > svg > g:nth-child(5) > g:nth-child(${i}) > text`
+        const element = document.querySelector(selected);
+        titles.push(element);
+    }
+
+    return titles;
 }
