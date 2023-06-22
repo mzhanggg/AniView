@@ -59,18 +59,50 @@ export async function graphTopAnimeGenres() {
         .data(root.descendants().slice(1))
         .join("circle")
             .attr("pointer-events", d => !d.children ? "none" : null)
+            .attr("id", d => d.id)
             .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
+    // const label = svg.append("g")
+    //                 .attr("pointer-events", "none")
+    //                 .attr("text-anchor", "middle")
+    //                 .selectAll("text")
+    //                 .data(root.descendants())
+    //                 .join("text")
+    //                   .style("fill-opacity", d => d.parent === root ? 1 : 0)
+    //                   .text(d => d.data.name)
+    //                   .attr('font-weight', 'bold')
+    //                   .attr('font-size', '18px')
+
     const label = svg.append("g")
-                    .attr("pointer-events", "none")
-                    .attr("text-anchor", "middle")
-                    .selectAll("text")
-                    .data(root.descendants())
-                    .join("text")
-                      .style("fill-opacity", d => d.parent === root ? 1 : 0)
-                      .text(d => d.data.name)
-                      .attr('font-weight', 'bold')
-                      .attr('font-size', '9.9px')
+        .attr("pointer-events", "none")
+        .attr("text-anchor", "middle")
+        .selectAll("text")
+        .data(root.descendants())
+        .join("text")
+        .style("fill-opacity", d => d.parent === root ? 1 : 0)
+        .text(d => d.data.name)
+        .attr('font-weight', 'bold')
+        .attr('font-size', '18px')
+        .attr('dy', '0.35em') 
+
+        label.each(function () {
+            const node = d3.select(this);
+            const words = node.text().split(' ');
+
+            node.text(null);
+
+            for (const word of words) {
+                const tspan = node.append('tspan').text(word);
+                if (words.indexOf(word) === 0) {
+                  tspan.attr('x', 0)
+                       .attr('dy', '-30px'); 
+                } else if (words.indexOf(word) !== words.length - 1) {
+                  tspan.attr('x', '0')
+                       .attr('dy', '1em'); 
+                }
+            }
+    });
+
 
     zoomTo([root.x, root.y, root.r * 2]);
 
