@@ -22,7 +22,7 @@ Users are currently presented with 2 visualizations sorted by top anime and genr
 # Implementation
 Data populating the graphs and the sidebars come from asynchronous fetches to Jikan API, which is then parsed and returned to a corresponding asynchronous function that displays the information.
 
-```
+``` js
 async function fetchTopAnime() {
     const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
     const data = await response.json();
@@ -42,7 +42,7 @@ async function fetchTopAnime() {
 ```
 
 # Technologies, Libraries, APIs
-- All visualizationo were iimplemented with the [D3 API](https://d3js.org/)
+- All visualizations were implemented with the [D3 API](https://d3js.org/)
 - Data was pulled from [Jikan API](https://docs.api.jikan.moe/)
 
 # Future Implementations  
