@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bubblePacking.addEventListener("click", graphTopAnimeGenres);
 
     // barGraph.addEventListener("click", () => {
+    //     barGraph.id = "selected"
     //     barGraph.setAttribute("id", "selected");
     //     drawTopAnime();
     // });
