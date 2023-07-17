@@ -22,7 +22,7 @@ async function fetchAnime() {
     return animeDetails;
 }
 
-async function fillSidebar() {
+export async function fillSidebar() {
     clearSidebar();
 
     const loadingSidebar = d3.select("#loading-sidebar")

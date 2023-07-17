@@ -1,4 +1,5 @@
 import { fillSidebar } from './side-bar'
+import { clearVisual } from './util';
 
 async function fetchTopAnime() {
     const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
@@ -111,14 +112,6 @@ export async function drawTopAnime() {
 
     return svg.node();
 
-}
-    
-function clearVisual() {
-    const message = d3.select("#message")
-    message.remove();
-    
-    const svg = d3.select('svg');
-    svg.remove();
 }
 
 function selectAnimeTitle() {

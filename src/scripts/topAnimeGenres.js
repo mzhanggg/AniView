@@ -1,3 +1,6 @@
+import { fillSidebar } from './side-bar'
+import { clearVisual } from './util';
+
 async function fetchTopAnimeGenres() {
     const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
     const data = await response.json();
@@ -133,17 +136,16 @@ export async function graphTopAnimeGenres() {
           .transition(transition)
             .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
             .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        
+        console.log(d)
+        console.log(d.data)
+
+        if (d.data.name !== 'root') {
+            fillSidebar(d.data);
+        }
     }
 
     loading.style("display", "none")
     
     return svg.node();
-}
-
-function clearVisual() {
-    const message = d3.select("#message")
-    message.remove();
-
-    const svg = d3.select('svg');
-    svg.remove();
 }
