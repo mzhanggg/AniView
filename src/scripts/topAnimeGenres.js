@@ -1,3 +1,6 @@
+import { fillSidebar } from './side-bar'
+import { clearVisual } from './util';
+
 async function fetchTopAnimeGenres() {
     const response = await fetch(`https://api.jikan.moe/v4/top/anime`);
     const data = await response.json();
@@ -58,20 +61,16 @@ export async function graphTopAnimeGenres() {
         .selectAll("circle")
         .data(root.descendants().slice(1))
         .join("circle")
-            .attr("pointer-events", d => !d.children ? "none" : null)
-            .attr("id", d => d.id)
-            .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
+        .attr("pointer-events", "all")
+        .attr("class", (d) => (d.children ? "genre-node" : "anime-node")) 
+        .attr("id", d => d.data.id)
+        .on("click", (event, d) => focus !== d && (zoom(event, d), event.stopPropagation()));
 
-    // const label = svg.append("g")
-    //                 .attr("pointer-events", "none")
-    //                 .attr("text-anchor", "middle")
-    //                 .selectAll("text")
-    //                 .data(root.descendants())
-    //                 .join("text")
-    //                   .style("fill-opacity", d => d.parent === root ? 1 : 0)
-    //                   .text(d => d.data.name)
-    //                   .attr('font-weight', 'bold')
-    //                   .attr('font-size', '18px')
+    const animeNode = svg.selectAll(".anime-node");
+    animeNode.on("click", (event, d) => {
+        event.stopPropagation();
+        fillSidebar()
+    });
 
     const label = svg.append("g")
         .attr("pointer-events", "none")
@@ -88,7 +87,6 @@ export async function graphTopAnimeGenres() {
         label.each(function () {
             const node = d3.select(this);
             const words = node.text().split(' ');
-
             node.text(null);
 
             for (const word of words) {
@@ -96,7 +94,7 @@ export async function graphTopAnimeGenres() {
                 if (words.indexOf(word) === 0) {
                   tspan.attr('x', 0)
                        .attr('dy', '-30px'); 
-                } else if (words.indexOf(word) !== words.length - 1) {
+                } else {
                   tspan.attr('x', '0')
                        .attr('dy', '1em'); 
                 }
@@ -133,17 +131,10 @@ export async function graphTopAnimeGenres() {
           .transition(transition)
             .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
             .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        
     }
 
     loading.style("display", "none")
     
     return svg.node();
-}
-
-function clearVisual() {
-    const message = d3.select("#message")
-    message.remove();
-
-    const svg = d3.select('svg');
-    svg.remove();
 }

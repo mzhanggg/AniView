@@ -68,6 +68,11 @@ circle {
     fill: #F2AF88;
     opacity: 0.2;
 }
+
+circle:hover {
+    stroke: yellow;
+    stroke-width: 4px;
+}
 /*!********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/bar-graph.css ***!
   \********************************************************************************************************/
@@ -238,10 +243,6 @@ h1 {
   flex-wrap: wrap;
 }
 
-.sidebar {
-  /* height: 1400px; */
-}
-
 .sidebar > ul {
   padding: 20px;
   width: 300px;
@@ -345,4 +346,10 @@ body {
   font-weight: bold;
   text-align: center;
   text-shadow: 2px 2px 8px black;
+}
+
+#selected {
+  text-shadow: 2px 2px 10px #F29580;
+  color: white;
+  font-weight: bold;
 }

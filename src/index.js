@@ -1,15 +1,26 @@
-import {drawTopAnime} from "./scripts/topAnime.js";
-import {graphTopAnimeGenres} from "./scripts/topAnimeGenres.js";
-import {closeModalWindow, closeModalBtn, openModal} from "./scripts/modal.js";
+import { drawTopAnime } from "./scripts/topAnime.js";
+import { graphTopAnimeGenres } from "./scripts/topAnimeGenres.js";
+import { closeModalWindow, closeModalBtn, openModal } from "./scripts/modal.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const barGraph = document.querySelector(".bar-graph")
-    const bubblePacking = document.querySelector(".bubble-packing")
-    
-    barGraph.addEventListener("click", drawTopAnime)
-    bubblePacking.addEventListener("click", graphTopAnimeGenres)
+    const barGraph = document.querySelector(".bar-graph");
+    const bubblePacking = document.querySelector(".bubble-packing");
+
+    barGraph.addEventListener("click", () => {
+        barGraph.id = "selected";
+        bubblePacking.id = "";
+
+        drawTopAnime();
+    });
+
+    bubblePacking.addEventListener("click", () => {
+        barGraph.id = "";
+        bubblePacking.id = "selected";
+
+        graphTopAnimeGenres();
+    });
 
     const modal = document.querySelector(".modal");
     const closeBtn = document.querySelector(".closeBtn");
@@ -19,7 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const title = document.querySelector('h1');
     title.addEventListener("click", openModal);
-    
-
 
 })
