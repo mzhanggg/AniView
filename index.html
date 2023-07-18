@@ -10,6 +10,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/99ac4bc107.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque&family=Space+Grotesk&family=Space+Mono&display=swap" rel="stylesheet">
     <title>AniView</title>
@@ -42,10 +43,10 @@
     <div class="container">
       
       <div class="sidebar">
-        <ul class="anime-info">
-          <p id="message1">
-            Select a data point on the data visualizations to see further details
-          </p>
+        <ul class="anime-info" id="none">
+          <div id="message1">
+            <!-- Select a data point on the data visualizations to see show details -->
+          </div>
 
           <div id="loading-sidebar">
             <img id="loading-sidebar" src="src/assets/loading-sidebar.gif">
@@ -63,9 +64,13 @@
       </div>
       
       <div id="canva">
-        <p id="message">
-          Select a category in the navigation bar above to generate data visualizations
-        </p>
+        <div id="message">
+          <p>How to get started</p>
+          <div id="line"></div>
+          <p>1. Select a category in the navigation bar above to generate data visualizations</p>
+          <p>2. <i class="fa-solid fa-computer-mouse"></i> Interact with the graphs to find additional show details</p>
+          
+        </div>
 
         <div id="loading">
           <img id="loading-gif" src="src/assets/loading-sidebar.gif">
@@ -78,6 +83,7 @@
       <div class="links">
         <a href="https://www.linkedin.com/in/michele-zhang-380417199/"><img id="linkedin"src="src/assets/linkedin.png"></a>
         <a href="https://github.com/mzhanggg/AniView"><img id="github" src="src/assets/github.png"></a>
+        <a href="https://wellfound.com/u/michele-zhang-1"><img id="github" src="src/assets/wellfound.png"></a>
       </div>
       
       <div id="name">

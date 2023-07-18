@@ -24,6 +24,9 @@ async function fetchAnime() {
 
 export async function fillSidebar() {
     clearSidebar();
+    
+    const sidebar = document.querySelector('.anime-info');
+    sidebar.id = "active"
 
     const loadingSidebar = d3.select("#loading-sidebar")
     loadingSidebar.style("display", "flex")

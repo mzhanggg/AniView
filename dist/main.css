@@ -170,6 +170,10 @@ line {
 /*!*******************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/side-bar.css ***!
   \*******************************************************************************************************/
+#none {
+    display: none;
+}
+
 .anime-info > li {
     margin-bottom: 10px;
     font-family: 'Space Grotesk', sans-serif;
@@ -305,6 +309,18 @@ body {
   text-transform: uppercase;
   opacity: 0.7;
   font-family: "Space Grotesk", sans-serif;
+  padding: 20px;
+  margin: 40px;
+}
+
+#message * {
+  margin: 10px 0;
+}
+
+#line {
+  border-bottom: 1px dotted yellow;
+  width: 33%;
+  margin: 15px auto;
 }
 
 .info {

@@ -11,22 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
     barGraph.addEventListener("click", () => {
         barGraph.id = "selected";
         bubblePacking.id = "";
-
         drawTopAnime();
     });
 
     bubblePacking.addEventListener("click", () => {
         barGraph.id = "";
         bubblePacking.id = "selected";
-
         graphTopAnimeGenres();
     });
 
-    const modal = document.querySelector(".modal");
     const closeBtn = document.querySelector(".closeBtn");
-
-    closeBtn.addEventListener("click", closeModalBtn)
-    window.addEventListener("click", closeModalWindow)
+    closeBtn.addEventListener("click", closeModalBtn);
+    window.addEventListener("click", closeModalWindow);
 
     const title = document.querySelector('h1');
     title.addEventListener("click", openModal);
