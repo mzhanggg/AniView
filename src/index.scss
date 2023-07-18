@@ -43,7 +43,7 @@ h1 {
 }
 
 .sidebar {
-    height: 1400px;
+    // height: 1400px;
 }
 
 .sidebar > ul {
@@ -51,7 +51,6 @@ h1 {
     width: 300px;
     border: #0B3140 2px solid;
     margin: 50px;
-    background: white;
     padding: 40px;
     opacity: .95;
     background-color: #0B3140;
@@ -62,7 +61,6 @@ h1 {
 }
 
 #canva {
-    background: white;
     flex: 1;
     display: flex;
     align-items: center;
@@ -155,3 +153,8 @@ body {
     text-shadow: 2px 2px 8px black; 
 }
 
+#selected {
+    text-shadow: 2px 2px 10px #F29580; 
+    color: white;
+    font-weight: bold;
+}

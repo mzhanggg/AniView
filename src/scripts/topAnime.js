@@ -13,7 +13,7 @@ async function fetchTopAnime() {
         const id = datum.mal_id;
         
         animeDetails.push({title, genres, favoritesCount, id});
-    });
+    }); 
 
     return animeDetails;
 }
